@@ -1,0 +1,11 @@
+package main
+
+templ errorPage(title string, err string) {
+  if err == "AuthError" {
+<h1>Auth or subject length error</h1>
+  } else {
+<h1>Parameter error</h1>
+  }
+	// @counts(title, ps, user)
+	// @form()
+}

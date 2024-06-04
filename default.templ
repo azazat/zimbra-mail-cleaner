@@ -1,0 +1,46 @@
+package main
+
+templ counts(title string, ps string) {
+  <title>{ title }</title>
+  <div>
+    Default page shown here 
+  </div>
+  <div>
+    { ps }
+  </div>
+}
+
+templ form() {
+	// <form action="/" method="POST">
+	// 	<div><button type="submit" name="global" value="global">Global</button></div>
+	// 	<div><button type="submit" name="user" value="user">User</button></div>
+	// </form>
+
+  <form action="/" method="post">
+    <label for="secretkey">key:</label>
+    <input type="text" id="secretkey" name="secretkey"><br><br>
+    <label for="subject">subject:</label>
+    <input type="text" id="subject" name="subject"><br><br>
+    <input type="submit" value="Go">
+  </form>
+}
+
+templ page(title string, ps string, post bool) {
+
+  if post && ps == "" {
+    <h1>Cleaning is launched</h1>
+  } else if post {
+    <h1>Can't accept form.</h1>
+    <h1>Please wait for running proccesses to complete:</h1>
+    @counts(title, ps)
+  }
+
+  if !post && ps != "" {
+    <h1>Can't show form.</h1>
+    <h1>Please wait for running proccesses to complete: </h1>
+    @counts(title, ps)
+  } else if !post {
+    @counts(title, ps)
+    @form()
+  }
+}
